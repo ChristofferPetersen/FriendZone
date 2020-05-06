@@ -1,6 +1,9 @@
 ﻿body {
 }
 
+h1 {
+    text-align: center;
+}
 .center {
     display: block;
     margin-left: auto;
