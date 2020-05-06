@@ -21,26 +21,11 @@
                 <div>
                     <img src="image/FZ-Logo-2-1.png" alt="Friendzone logo(placeholder)" height="200" class="center">
                     <h1 class="centerText">Please state your username</h1>
+
                     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
                     <asp:TextBox ID="TextBox1" runat="server" class="center"></asp:TextBox>
                     <asp:button id="validateNameButton" OnClientClick="ProcessData('TextBox1'); return false;" runat="server" Text="Enter"></asp:button>
                 </div>
-
-                <script type="text/javascript">
-                    function ProcessData(x) {
-                        var x2 = document.getElementById(x).value;
-                        PageMethods.ProcessData(x2, onsuccess, onfailed);
-                        function onsuccess(result) {
-                            $("#Login").hide();
-                            $("#Canvas").show();
-
-                            document.getElementById('username').innerHTML = x2;
-                        }
-                        function onfailed(){
-                            alert("Retard alert");
-                        }
-                    }
-                </script>
             </form>
         </section>
 

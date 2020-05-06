@@ -1,4 +1,21 @@
-﻿﻿//----------------------------------------------------------------------------------------------------//
+﻿//----------------------------------------------------------------------------------------------------//
+// Login //
+
+function ProcessData(x) {
+    var x2 = document.getElementById(x).value;
+    PageMethods.ProcessData(x2, onsuccess, onfailed);
+    function onsuccess() {
+        $("#Login").hide();
+        $("#Canvas").show();
+
+        document.getElementById('username').innerHTML = x2;
+    }
+    function onfailed() {
+        alert("Retard alert");
+    }
+}
+
+//----------------------------------------------------------------------------------------------------//
 // GPS coordinates //
 
 var coordinates = document.getElementById("Coordinates");
