@@ -1,8 +1,4 @@
-﻿function usernameValidation() {
-    var x = document.getElementById("name").value;
-    document.getElementById("demo").innerHTML = x;
-}
-﻿//----------------------------------------------------------------------------------------------------//
+﻿﻿//----------------------------------------------------------------------------------------------------//
 // GPS coordinates //
 
 var coordinates = document.getElementById("Coordinates");
@@ -16,8 +12,8 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    coordinates.innerHTML = "Bredtegrader: " + position.coords.latitude +
-        "<br>Længdegrader: " + position.coords.longitude;
+    coordinates.innerHTML = "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude;
 }
 
 //----------------------------------------------------------------------------------------------------//

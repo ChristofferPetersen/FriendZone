@@ -4,6 +4,10 @@
 h1 {
     text-align: center;
 }
+
+#Canvas {
+    display: none;
+}
 .center {
     display: block;
     margin-left: auto;
