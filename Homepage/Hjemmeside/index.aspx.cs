@@ -20,22 +20,38 @@ namespace Hjemmeside
         public static bool ProcessData(string name)
         {
             Console.WriteLine(name);
-            people.Add(new Person(people.Count, name));
+            people.Add(new Person(people.Count, name, "", ""));
             return name != null;
         }
+
+        //[WebMethod]
+        //public static bool UpdatePerson(string name, string jsLongitude, string jsLatitude)
+        //{
+        //    for (int i = 0; i < people.Count; i++)
+        //    {
+        //        if(people[i].name == name)
+        //        {
+        //            people[i].longitude = jsLongitude;
+        //            people[i].latitude = jsLatitude;
+        //        }
+        //    }
+        //    return name != null;
+        //}
     }
 
     public class Person
     {
         int id;
-        string name;
-        string latitude;
-        string longitude;
+        public string name;
+        public string latitude;
+        public string longitude;
 
-        public Person(int id, string name)
+        public Person(int id, string name, string latitude, string longitude)
         {
             this.id = id;
             this.name = name;
+            this.latitude = latitude;
+            this.longitude = longitude;
         }
     }
 }
