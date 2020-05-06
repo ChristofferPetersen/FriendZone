@@ -38,7 +38,8 @@
                 <button onclick="getLocation()">Show coordinates</button>
 
                 <!--Location given from button-->
-                <p id="Coordinates"></p>
+                <p id="Longitude"></p>
+                <p id="Latitude"></p>
 
                 <!--The map-->
                 <!--<canvas id="MapHolder"></canvas>-->

@@ -29,15 +29,13 @@ namespace Hjemmeside
     {
         int id;
         string name;
-        double latitude;
-        double longitude;
+        string latitude;
+        string longitude;
 
         public Person(int id, string name)
         {
             this.id = id;
             this.name = name;
-            //this.latitude = latitude;
-            //this.longitude = longitude;
         }
     }
 }

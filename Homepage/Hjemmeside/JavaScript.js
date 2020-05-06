@@ -3,6 +3,7 @@
 
 function ProcessData(x) {
     var x2 = document.getElementById(x).value;
+
     PageMethods.ProcessData(x2, onsuccess, onfailed);
     function onsuccess() {
         $("#Login").hide();
@@ -18,20 +19,22 @@ function ProcessData(x) {
 //----------------------------------------------------------------------------------------------------//
 // GPS coordinates //
 
-var coordinates = document.getElementById("Coordinates");
+var Longitude = document.getElementById("Longitude");
+var Latitude = document.getElementById("Latitude");
 
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-        coordinates.innerHTML = "Geolocation er ikke supporteret i denne browser.";
+        Longitude.innerHTML = "Geolocation er ikke supporteret i denne browser.";
     }
 }
 
 function showPosition(position) {
-    coordinates.innerHTML = "Latitude: " + position.coords.latitude +
-        "<br>Longitude: " + position.coords.longitude;
+    Longitude.innerHTML = "Longitude: " + position.coords.longitude;
+    Latitude.innerHTML = "Latitude: " + position.coords.latitude;
 }
+
 
 //----------------------------------------------------------------------------------------------------//
 // GPS coordinates - Error handling //
