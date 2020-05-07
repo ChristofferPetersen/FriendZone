@@ -31,6 +31,7 @@ function GetPeople() {
         },
         success: function (result) {
             console.log("We returned: " + result.d);
+            document.getElementById('Person').innerHTML = result.d;
         }
     });
 }

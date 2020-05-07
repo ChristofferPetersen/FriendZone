@@ -23,7 +23,7 @@ namespace Hjemmeside
             string a = "";
             foreach (Person person in people)
             {
-                a += person + " ";
+                a += "ID: " + person.id + " - " + "Name: " + person.name + " - " + "Longitude: " + person.longitude + " - " + "Latitude: " + person.latitude + "<br>";
             }
             return a;
         }
@@ -53,7 +53,7 @@ namespace Hjemmeside
 
     public class Person
     {
-        int id;
+        public int id;
         public string name;
         public string latitude;
         public string longitude;

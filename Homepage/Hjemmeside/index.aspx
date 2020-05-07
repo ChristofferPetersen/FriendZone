@@ -50,6 +50,7 @@
 
                 <!--List of people-->
                 <button onclick="GetPeople()">Show people</button>
+                <p id="Person"></p>
             </div>
         </section>
 
