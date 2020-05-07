@@ -17,6 +17,25 @@ function ProcessData(x) {
 }
 
 //----------------------------------------------------------------------------------------------------//
+// Get People //
+
+function GetPeople() {
+    $.ajax({
+        type: "POST",
+        url: "index.aspx/ProcessPeople",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " +
+                errorThrown);
+        },
+        success: function (result) {
+            console.log("We returned: " + result.d);
+        }
+    });
+}
+
+//----------------------------------------------------------------------------------------------------//
 // GPS coordinates //
 
 var Longitude = document.getElementById("Longitude");

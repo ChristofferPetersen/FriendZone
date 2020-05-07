@@ -18,7 +18,7 @@ namespace Hjemmeside
         public static List<Person> people = new List<Person>();
 
         [WebMethod]
-        public string ProcessPeople()
+        public static string ProcessPeople()
         {
             string a = "";
             foreach (Person person in people)
