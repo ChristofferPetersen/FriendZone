@@ -16,6 +16,7 @@ namespace Hjemmeside
         }
 
         public static List<Person> people = new List<Person>();
+
         [WebMethod]
         public string ProcessPeople()
         {
@@ -35,19 +36,19 @@ namespace Hjemmeside
             return name != null;
         }
 
-        //[WebMethod]
-        //public static bool UpdatePerson(string name, string jsLongitude, string jsLatitude)
-        //{
-        //    for (int i = 0; i < people.Count; i++)
-        //    {
-        //        if(people[i].name == name)
-        //        {
-        //            people[i].longitude = jsLongitude;
-        //            people[i].latitude = jsLatitude;
-        //        }
-        //    }
-        //    return name != null;
-        //}
+        [WebMethod]
+        public static bool UpdatePerson(string name, string longitude, string latitude)
+        {
+            for (int i = 0; i < people.Count; i++)
+            {
+                if (people[i].name == name)
+                {
+                    people[i].longitude = longitude;
+                    people[i].latitude = latitude;
+                }
+            }
+            return name != null;
+        }
     }
 
     public class Person

@@ -36,7 +36,7 @@
             <!--Stuff for canvas-->
             <div id="CoordinatesBox">
                 <!--Button shows the current gps location (Longitude / Latitude)-->
-                <button onclick="getLocation()">Show coordinates</button>
+                <button onclick="getLocation();">Show coordinates</button>
 
                 <!--Location given from button-->
                 <p id="Longitude"></p>

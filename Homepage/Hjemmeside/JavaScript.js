@@ -22,19 +22,41 @@ function ProcessData(x) {
 var Longitude = document.getElementById("Longitude");
 var Latitude = document.getElementById("Latitude");
 
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        Longitude.innerHTML = "Geolocation er ikke supporteret i denne browser.";
-    }
+ function getLocation() {
+     if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            Longitude.innerHTML = "Geolocation er ikke supporteret i denne browser.";
+        }
 }
 
 function showPosition(position) {
-    Longitude.innerHTML = "Longitude: " + position.coords.longitude;
-    Latitude.innerHTML = "Latitude: " + position.coords.latitude;
-}
+    var username = document.getElementById("username").innerHTML;
 
+    var dataValue = {
+        name: username,
+        longitude: position.coords.longitude,
+        latitude: position.coords.latitude
+    };
+
+    Longitude.innerHTML = "Longitude: " + dataValue.longitude;
+    Latitude.innerHTML = "Latitude: " + dataValue.latitude;
+
+    $.ajax({
+        type: "POST",
+        url: "index.aspx/UpdatePerson",
+        data: JSON.stringify(dataValue),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " +
+                errorThrown);
+        },
+        success: function () {
+            alert("GPS kordinaterne er nu opdateret.")
+        }
+    });
+}
 
 //----------------------------------------------------------------------------------------------------//
 // WEBMETHOD PASSING //
