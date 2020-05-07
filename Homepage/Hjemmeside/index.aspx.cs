@@ -10,10 +10,21 @@ namespace Hjemmeside
 {
     public partial class index : System.Web.UI.Page
     {
-        public static List<Person> people = new List<Person>();
         protected void Page_Load(object sender, EventArgs e)
         {
+           
+        }
 
+        public static List<Person> people = new List<Person>();
+        [WebMethod]
+        public string ProcessPeople()
+        {
+            string a = "";
+            foreach (Person person in people)
+            {
+                a += person + " ";
+            }
+            return a;
         }
 
         [WebMethod]

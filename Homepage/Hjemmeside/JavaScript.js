@@ -37,6 +37,23 @@ function showPosition(position) {
 
 
 //----------------------------------------------------------------------------------------------------//
+// WEBMETHOD PASSING //
+
+function peoplePassing(ProcessPeople) {
+    $.ajax({
+        type: 'POST',
+        url: 'default.aspx/Create',
+        data: ProcessPeople,
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data, status) {
+            alert(status)
+        },
+        error: alert("error!")
+    });
+}
+
+//----------------------------------------------------------------------------------------------------//
 // GPS coordinates - Error handling //
 
 //function showError(error) {

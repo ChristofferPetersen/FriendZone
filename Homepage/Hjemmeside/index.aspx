@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Hjemmeside.index" %>
+<script src="Script/jquery-1.9.1.min.js" type="text/javascript"></script> 
 
 <!DOCTYPE html>
 <html>
@@ -19,7 +20,7 @@
             <form id="form1" runat="server">
                 <!--Stuff for login-->
                 <div>
-                    <img src="image/FZ-Logo-2-1.png" alt="Friendzone logo(placeholder)" height="200" class="center">
+                    <img src="image/logo.png" alt="Friendzone logo(placeholder)" height="250" class="center">
                     <h1 class="centerText">Please state your username</h1>
 
                     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
