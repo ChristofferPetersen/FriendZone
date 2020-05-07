@@ -18,7 +18,7 @@ namespace Hjemmeside
         [WebMethod]
         public static string OnSubmit(string name, bool isGoing, string returnAddress)
         {
-            return "it worked" + name +  isGoing + returnAddress;
+            return "it worked" + name + isGoing + returnAddress;
         }
 
     }

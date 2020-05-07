@@ -13,9 +13,34 @@
         <!--JS CDN-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+        <!--JQ Link-->
+        <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
         <title>FriendZone</title>
     </head>
     <body>
+         
+        <script>
+        function SendToCodeBehind(person, isAttending, returnEmail)
+        {
+            var dataValue = "{ person: '"+a+"'}";
+            $.ajax({
+                type: "POST",
+                url: "index.aspx/ProcessPeople",
+                data: dataValue,
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " +   
+                    errorThrown);
+                },
+                success: function (result) {
+                    alert("We returned: " + result.d);
+                }
+            });
+        }
+        </script>
+
         <section id="Login">
             <form id="form1" runat="server">
                 <!--Stuff for login-->
@@ -43,6 +68,9 @@
                 <p id="Latitude"></p>
 
                 <!--The map-->
+
+                <!--List of people-->
+                <button onclick="ProcessPeople()">Show people</button>
                 <!--<canvas id="MapHolder"></canvas>-->
             </div>
         </section>
