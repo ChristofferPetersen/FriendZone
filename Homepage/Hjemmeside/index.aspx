@@ -49,7 +49,8 @@
                 <!--<canvas id="MapHolder"></canvas>-->
 
                 <!--List of people-->
-                <button onclick="GetPeople()">Show people</button>
+                <%--<button id="gpsBtn" onclick="GetPeople()">Show people</button>--%>
+                <button id="gpsBtn" onclick="setInterval(function(){ getLocation(); GetPeople(); }, 5000);">Show people</button>
                 <p id="Person"></p>
             </div>
         </section>

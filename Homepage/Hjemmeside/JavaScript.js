@@ -73,7 +73,7 @@ function showPosition(position) {
                 errorThrown);
         },
         success: function () {
-            alert("GPS kordinaterne er nu opdateret.")
+            console.log("GPS kordinaterne er nu opdateret.")
         }
     });
 }
