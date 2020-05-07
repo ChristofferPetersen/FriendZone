@@ -23,7 +23,7 @@
             <form id="form1" runat="server">
                 <!--Stuff for login-->
                 <div>
-                    <img src="image/logo.png" alt="Friendzone logo(placeholder)" height="250" class="center">
+                    <img src="Images/logo.png" alt="Friendzone logo(placeholder)" height="250" class="center">
                     <h1 class="centerText">Please state your username</h1>
 
                     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
