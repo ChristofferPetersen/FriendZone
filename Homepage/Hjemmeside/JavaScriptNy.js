@@ -2,14 +2,11 @@
 // Login //
 
 function ProcessPerson() {
-    console.log("Enter function")
     var username = document.getElementById("UserNameInput").value;
 
     var dataValue = {
         name: username
     };
-
-    console.log("Create object");
 
     $.ajax({
         type: "POST",
@@ -29,8 +26,6 @@ function ProcessPerson() {
             document.getElementById('username').innerHTML = x2;
         }
     });
-
-    console.log("After Ajax");
 }
 
 //----------------------------------------------------------------------------------------------------//
