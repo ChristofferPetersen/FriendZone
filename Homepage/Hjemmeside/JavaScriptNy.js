@@ -23,7 +23,7 @@ function ProcessPerson() {
             $("#Login").hide();
             $("#Canvas").show();
 
-            document.getElementById('username').innerHTML = x2;
+            document.getElementById('username').innerHTML = username;
         }
     });
 }

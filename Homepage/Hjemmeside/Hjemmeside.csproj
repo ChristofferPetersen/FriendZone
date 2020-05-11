@@ -69,7 +69,6 @@
   <ItemGroup>
     <Content Include="Images\logo.png" />
     <Content Include="index.aspx" />
-    <Content Include="JavaScript.js" />
     <Content Include="JavaScriptNy.js" />
     <Content Include="StyleSheet.css" />
     <Content Include="victor.aspx" />
