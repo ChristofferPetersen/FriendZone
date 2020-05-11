@@ -22,11 +22,15 @@ function ProcessPerson() {
         },
         success: function () {
             console.log("Du er nu oprettet.")
+
+            $("#Login").hide();
+            $("#Canvas").show();
+
+            document.getElementById('username').innerHTML = x2;
         }
     });
 
     console.log("After Ajax");
-    return false;
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -54,12 +58,12 @@ function GetPeople() {
 var Longitude = document.getElementById("Longitude");
 var Latitude = document.getElementById("Latitude");
 
- function getLocation() {
-     if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            Longitude.innerHTML = "Geolocation er ikke supporteret i denne browser.";
-        }
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        Longitude.innerHTML = "Geolocation er ikke supporteret i denne browser.";
+    }
 }
 
 function showPosition(position) {

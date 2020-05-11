@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Hjemmeside.index" %>
-<script src="Script/jquery-1.9.1.min.js" type="text/javascript"></script> 
+    <script src="Script/jquery-1.9.1.min.js" type="text/javascript"></script> 
 
 <!DOCTYPE html>
 <html>
@@ -25,10 +25,9 @@
                 <div>
                     <img src="Images/logo.png" alt="Friendzone logo(placeholder)" height="250" class="center">
                     <h1 class="centerText">Please state your username</h1>
-
-                    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
-                    <asp:TextBox ID="TextBox1" runat="server" class="center"></asp:TextBox>
-                    <asp:button id="validateNameButton" OnClientClick="ProcessData('TextBox1'); return false;" runat="server" Text="Enter"></asp:button>
+                    
+                    <input id="UserNameInput" runat="server" class="center" placeholder="State your name" />
+                    <button type="button" id="validateNameButton" onclick="ProcessPerson(); return false;">Log ind</button>
                 </div>
             </form>
         </section>
@@ -49,12 +48,10 @@
                 <!--<canvas id="MapHolder"></canvas>-->
 
                 <!--List of people-->
-                <%--<button id="gpsBtn" onclick="GetPeople()">Show people</button>--%>
                 <button id="gpsBtn" onclick="setInterval(function(){ getLocation(); GetPeople(); }, 5000);">Show people</button>
                 <p id="Person"></p>
             </div>
         </section>
-
-        <script src="JavaScript.js"></script>
+        <script src="JavaScriptNy.js"></script>
     </body>
 </html>

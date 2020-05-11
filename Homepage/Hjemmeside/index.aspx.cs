@@ -16,6 +16,7 @@ namespace Hjemmeside
         }
 
         public static List<Person> people = new List<Person>();
+        public static int thisIsMyID;
 
         [WebMethod]
         public static string ProcessPeople()
@@ -23,16 +24,27 @@ namespace Hjemmeside
             string a = "";
             foreach (Person person in people)
             {
-                a += "ID: " + person.id + " - " + "Name: " + person.name + " - " + "Longitude: " + person.longitude + " - " + "Latitude: " + person.latitude + "<br>";
+                if(thisIsMyID == person.id)
+                {
+                    person.thisIsMe = "Me";
+                }
+                else
+                {
+                    person.thisIsMe = "Not me";
+                }
+
+                a += "ID: " + person.id + " - " + "Name: " + person.name + " - " + "Longitude: " + person.longitude + " - " + "Latitude: " + person.latitude + " - " + "Is this me?: " + person.thisIsMe + "<br>";
             }
             return a;
         }
 
         [WebMethod]
-        public static bool ProcessData(string name)
+        public static bool ProcessPerson(string name)
         {
             Console.WriteLine(name);
-            people.Add(new Person(people.Count, name, "", ""));
+            people.Add(new Person(people.Count + 1, name, "", "", ""));
+            thisIsMyID = people.Count;
+
             return name != null;
         }
 
@@ -41,7 +53,7 @@ namespace Hjemmeside
         {
             for (int i = 0; i < people.Count; i++)
             {
-                if (people[i].name == name)
+                if (people[i].id == thisIsMyID)
                 {
                     people[i].longitude = longitude;
                     people[i].latitude = latitude;
@@ -57,13 +69,15 @@ namespace Hjemmeside
         public string name;
         public string latitude;
         public string longitude;
+        public string thisIsMe;
 
-        public Person(int id, string name, string latitude, string longitude)
+        public Person(int id, string name, string latitude, string longitude, string thisIsMe)
         {
             this.id = id;
             this.name = name;
             this.latitude = latitude;
             this.longitude = longitude;
+            this.thisIsMe = thisIsMe;
         }
     }
 }
