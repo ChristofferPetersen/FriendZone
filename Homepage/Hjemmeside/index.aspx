@@ -42,18 +42,17 @@
 
             <!--Stuff for canvas-->
             <div id="CoordinatesBox">
-                <!--Button shows the current gps location (Longitude / Latitude)-->
                 <button onclick="getLocation();">Show coordinates</button>
+                <button id="gpsBtn" onclick="setInterval(function(){ getLocation(); GetPeople(); }, 5000);">Show people</button>
 
-                <!--Location given from button-->
+                <!--Location-->
                 <p id="Longitude"></p>
                 <p id="Latitude"></p>
 
                 <!--The map-->
-                <!--<canvas id="MapHolder"></canvas>-->
+                <canvas id="MapHolder" style="width: 500px; height: 300px; background-color: lightgray; border: 1px solid darkgray;"></canvas>
 
                 <!--List of people-->
-                <button id="gpsBtn" onclick="setInterval(function(){ getLocation(); GetPeople(); }, 5000);">Show people</button>
                 <p id="Person"></p>
             </div>
         </section>
