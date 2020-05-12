@@ -25,6 +25,8 @@ function ProcessPerson() {
 
             clientID = result.d;  // ID fra backend
 
+            Stickfigure(250, 150, 5);
+
             $("#Login").hide();
             $("#Canvas").show();
 
@@ -98,4 +100,54 @@ function showPosition(position) {
 }
 
 //----------------------------------------------------------------------------------------------------//
-// GPS coordinates //
+// Stickman canvas //
+function Stickfigure(x, y, size) {
+    // (x) venstre mod højre (0) - (500)
+    // (y) op mod ned (0) - (300)
+    // (0, 0) Øverste venstre hjørne
+
+    var c = document.getElementById("MapHolder");
+    var ctx = c.getContext("2d");
+
+    // Head
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.arc(x, y, 12.5 / size, 0, Math.PI * 2, true);
+    ctx.fill();
+
+    // body
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x, y + 40 / size);
+    ctx.strokeStyle = "black";
+    ctx.stroke();
+
+    // Mini stick
+    ctx.beginPath();
+    ctx.moveTo(x, y + 40 / size);
+    ctx.lineTo(x, y + 55 / size);
+    ctx.strokeStyle = "black";
+    ctx.stroke();
+
+    // arms
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+
+    ctx.moveTo(x, y + 25 / size); //arm 1
+    ctx.lineTo(x + 25 / size, y);
+
+    ctx.moveTo(x, y + 25 / size); //arm 2
+    ctx.lineTo(x - 25 / size, y);
+    ctx.stroke();
+
+    // legs
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+
+    ctx.moveTo(x, y + 40 / size); //ben 1
+    ctx.lineTo(x + 12 / size, y + 85 / size);
+
+    ctx.moveTo(x, y + 40 / size); //ben 2
+    ctx.lineTo(x - 12 / size, y + 85 / size);
+    ctx.stroke();
+}

@@ -58,7 +58,7 @@
                 <br />
 
                 <!--The map-->
-                <canvas id="MapHolder" style="width: 500px; height: 300px; background-color: lightgray; border: 1px solid darkgray;"></canvas>
+                <canvas id="MapHolder" width="500" height="300" style="background-color: lightgray; border: 1px solid darkgray;"></canvas>
                 <br />
 
                 <!--List of people-->
