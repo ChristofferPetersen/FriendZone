@@ -42,6 +42,8 @@ function ProcessPerson() {
 //----------------------------------------------------------------------------------------------------//
 // Get People //
 
+var counter = 0;
+
 function GetPeople() {
     var dataValue = {
         id: clientID
@@ -57,8 +59,28 @@ function GetPeople() {
             alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
         },
         success: function (result) {
-            console.log("We returned: " + result.d);
+            //console.log("We returned: " + result.d);
             document.getElementById('Person').innerHTML = result.d;
+
+            // Dele alle personer op i hver deres array index og fjerne os selv fra array
+            var personsArr = result.d.split('>');
+            var ID = parseInt(clientID, 10);
+            personsArr.splice(ID, 1)
+
+            // Dele hver person op i hver deres array index indexer
+            var person = [];
+            for (var i = 0; i < personsArr.length - 1; i++) {
+                person = personsArr[i].split('-');
+
+                if (counter <= personsArr.length) {
+                    // Laver en person for hver person i array
+                    Stickfigure(50 + (i * 25), 50 + (i * 25), 2, person[1]);
+                    counter++;
+                }
+                else {
+                    console.log("Already alive.");
+                }
+            }
         }
     });
 }
@@ -160,4 +182,6 @@ function Stickfigure(x, y, size, name) {
     ctx.fillStyle = "black";
     ctx.textAlign = "center";
     ctx.fillText(name, x, y - 15 / size);
+
+    console.log("I am alive. " + name);
 }
