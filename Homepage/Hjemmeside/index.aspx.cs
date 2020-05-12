@@ -12,19 +12,19 @@ namespace Hjemmeside
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            
         }
 
         public static List<Person> people = new List<Person>();
         public static int thisIsMyID;
 
         [WebMethod]
-        public static string ProcessPeople()
+        public static string ProcessPeople(string id)
         {
             string a = "";
             foreach (Person person in people)
             {
-                if(thisIsMyID == person.id)
+                if(Int32.Parse(id) == person.id)
                 {
                     person.thisIsMe = "Me";
                 }
@@ -39,21 +39,21 @@ namespace Hjemmeside
         }
 
         [WebMethod]
-        public static bool ProcessPerson(string name)
+        public static string ProcessPerson(string name)
         {
             Console.WriteLine(name);
             people.Add(new Person(people.Count + 1, name, "", "", ""));
             thisIsMyID = people.Count;
 
-            return name != null;
+            return thisIsMyID.ToString();
         }
 
         [WebMethod]
-        public static bool UpdatePerson(string name, string longitude, string latitude)
+        public static bool UpdatePerson(string id, string name, string longitude, string latitude)
         {
             for (int i = 0; i < people.Count; i++)
             {
-                if (people[i].id == thisIsMyID)
+                if (people[i].id == Int32.Parse(id))
                 {
                     people[i].longitude = longitude;
                     people[i].latitude = latitude;

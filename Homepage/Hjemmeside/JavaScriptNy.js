@@ -1,11 +1,14 @@
 ﻿//----------------------------------------------------------------------------------------------------//
 // Login //
 
+var clientID = ""; // ID from backend
+var username = document.getElementById("username").innerHTML;
+
 function ProcessPerson() {
-    var username = document.getElementById("UserNameInput").value;
+    var usernameInput = document.getElementById("UserNameInput").value;
 
     var dataValue = {
-        name: username
+        name: usernameInput
     };
 
     $.ajax({
@@ -17,13 +20,15 @@ function ProcessPerson() {
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
         },
-        success: function () {
+        success: function (result) {
             console.log("Du er nu oprettet.")
+
+            clientID = result.d;  // ID fra backend
 
             $("#Login").hide();
             $("#Canvas").show();
 
-            document.getElementById('username').innerHTML = username;
+            document.getElementById('username').innerHTML = usernameInput;
         }
     });
 }
@@ -32,9 +37,14 @@ function ProcessPerson() {
 // Get People //
 
 function GetPeople() {
+    var dataValue = {
+        id: clientID
+    };
+
     $.ajax({
         type: "POST",
         url: "index.aspx/ProcessPeople",
+        data: JSON.stringify(dataValue),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -62,9 +72,8 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    var username = document.getElementById("username").innerHTML;
-
     var dataValue = {
+        id: clientID,
         name: username,
         longitude: position.coords.longitude,
         latitude: position.coords.latitude

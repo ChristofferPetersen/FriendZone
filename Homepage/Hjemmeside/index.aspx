@@ -2,6 +2,11 @@
     <script src="Script/jquery-1.9.1.min.js" type="text/javascript"></script> 
 
 <!DOCTYPE html>
+
+<script runat="server">
+    // C# access
+</script>
+
 <html>
     <head runat="server">
         <!--Meta-->
@@ -20,14 +25,14 @@
     </head>
     <body>
          <section id="Login">
-            <form id="form1" runat="server">
+            <form id="form1" method="post" action="index.aspx" runat="server">
                 <!--Stuff for login-->
                 <div>
                     <img src="Images/logo.png" alt="Friendzone logo(placeholder)" height="250" class="center">
                     <h1 class="centerText">Please state your username</h1>
                     
-                    <input id="UserNameInput" runat="server" class="center" placeholder="State your name" />
-                    <button type="button" id="validateNameButton" onclick="ProcessPerson(); return false;">Log ind</button>
+                    <input id="UserNameInput" name="UserNameInput" runat="server" class="center" placeholder="State your name" />
+                    <button type="submit" id="validateNameButton" onclick="ProcessPerson(); return false;">Log ind</button>
                 </div>
             </form>
         </section>
