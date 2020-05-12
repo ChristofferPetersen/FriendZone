@@ -39,18 +39,27 @@
 
         <section id="Canvas">
             <h1 id="username"></h1>
+            <br />
 
             <!--Stuff for canvas-->
             <div id="CoordinatesBox">
                 <button onclick="getLocation();">Show coordinates</button>
                 <button id="gpsBtn" onclick="setInterval(function(){ getLocation(); GetPeople(); }, 5000);">Show people</button>
+                <br />
 
                 <!--Location-->
                 <p id="Longitude"></p>
                 <p id="Latitude"></p>
+                <br />
+
+                <!--Zoom control-->
+                <label for="Zoom">Size (between 0 and 100)</label>
+                <input type="range" id="Zoom" name="Zoom" min="0" max="100">
+                <br />
 
                 <!--The map-->
                 <canvas id="MapHolder" style="width: 500px; height: 300px; background-color: lightgray; border: 1px solid darkgray;"></canvas>
+                <br />
 
                 <!--List of people-->
                 <p id="Person"></p>
