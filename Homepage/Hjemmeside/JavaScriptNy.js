@@ -25,12 +25,16 @@ function ProcessPerson() {
 
             clientID = result.d;  // ID fra backend
 
-            Stickfigure(250, 150, 5);
+            document.getElementById('username').innerHTML = usernameInput;
+
+            var canvas = document.getElementById("MapHolder");
+            var width = canvas.width / 2;
+            var height = canvas.height / 2;
+
+            Stickfigure(width, height, 2, usernameInput); // StickFigure(canvas width, canvas height, size)
 
             $("#Login").hide();
             $("#Canvas").show();
-
-            document.getElementById('username').innerHTML = usernameInput;
         }
     });
 }
@@ -101,7 +105,7 @@ function showPosition(position) {
 
 //----------------------------------------------------------------------------------------------------//
 // Stickman canvas //
-function Stickfigure(x, y, size) {
+function Stickfigure(x, y, size, name) {
     // (x) venstre mod højre (0) - (500)
     // (y) op mod ned (0) - (300)
     // (0, 0) Øverste venstre hjørne
@@ -150,4 +154,10 @@ function Stickfigure(x, y, size) {
     ctx.moveTo(x, y + 40 / size); //ben 2
     ctx.lineTo(x - 12 / size, y + 85 / size);
     ctx.stroke();
+
+    // Text
+    ctx.font = 15 / size + "px Garamond";
+    ctx.fillStyle = "black";
+    ctx.textAlign = "center";
+    ctx.fillText(name, x, y - 15 / size);
 }
