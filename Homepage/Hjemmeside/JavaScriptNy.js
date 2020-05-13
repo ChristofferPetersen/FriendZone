@@ -81,8 +81,11 @@ function GetPeople() {
             for (var i = 0; i < personsArr.length - 1; i++) {
                 person = personsArr[i].split('-');
 
+                var posY = person[2].substring(11).trim();
+                var posX = person[3].substring(10).trim();
+
                 // Laver en person for hver person i array
-                Stickfigure(ctx, 50 + (i * 25), 50 + (i * 25), 2, person[1]);
+                Stickfigure(ctx, (width / 2) - posX, (height / 2) - posY, 2, person[1]);
             }
         }
     });
@@ -201,8 +204,11 @@ function showVal(newVal) {
             for (var i = 0; i < personsArr.length - 1; i++) {
                 person = personsArr[i].split('-');
 
+                var posY = person[2].substring(11).trim();
+                var posX = person[3].substring(10).trim();
+
                 // Laver en person for hver person i array
-                Stickfigure(ctx, 50 + (i * 25), 50 + (i * 25), newVal, person[1]);
+                Stickfigure(ctx, (width / 2) - posX, (height / 2) - posY, newVal, person[1]);
             }
         }
     }
@@ -217,8 +223,11 @@ function showVal(newVal) {
             for (var i = 0; i < personsArr.length - 1; i++) {
                 person = personsArr[i].split('-');
 
+                var posY = person[2].substring(11).trim();
+                var posX = person[3].substring(10).trim();
+
                 // Laver en person for hver person i array
-                Stickfigure(ctx, 50 + (i * 25), 50 + (i * 25), newVal, person[1]);
+                Stickfigure(ctx, (width / 2) - posX, (height / 2) - posY, newVal, person[1]);
             }
         }
     }
