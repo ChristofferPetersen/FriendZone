@@ -4,6 +4,11 @@
 var clientID = ""; // ID from backend
 var username = document.getElementById("username").innerHTML;
 
+var c = document.getElementById("MapHolder");
+var ctx = c.getContext("2d");
+var width = c.width;
+var height = c.height;
+
 function ProcessPerson() {
     var usernameInput = document.getElementById("UserNameInput").value;
 
@@ -25,13 +30,9 @@ function ProcessPerson() {
 
             clientID = result.d;  // ID fra backend
 
-            document.getElementById('username').innerHTML = usernameInput;
+            username = usernameInput;
 
-            var canvas = document.getElementById("MapHolder");
-            var width = canvas.width / 2;
-            var height = canvas.height / 2;
-
-            Stickfigure(width, height, 2, usernameInput); // StickFigure(canvas width, canvas height, size)
+            Stickfigure(c, ctx, width / 2, height / 2, 2, username); // StickFigure(canvas width, canvas height, size)
 
             $("#Login").hide();
             $("#Canvas").show();
@@ -62,24 +63,23 @@ function GetPeople() {
             //console.log("We returned: " + result.d);
             document.getElementById('Person').innerHTML = result.d;
 
+            //Fjerner alle personer og starter med at gentegne os selv.
+            ctx.clearRect(0, 0, width, height);
+            console.log(username);
+            Stickfigure(c, ctx, width / 2, height / 2, 2, username);
+
             // Dele alle personer op i hver deres array index og fjerne os selv fra array
             var personsArr = result.d.split('>');
             var ID = parseInt(clientID, 10);
-            personsArr.splice(ID, 1)
+            personsArr.splice(ID, 1);
 
             // Dele hver person op i hver deres array index indexer
             var person = [];
             for (var i = 0; i < personsArr.length - 1; i++) {
                 person = personsArr[i].split('-');
 
-                if (counter <= personsArr.length) {
-                    // Laver en person for hver person i array
-                    Stickfigure(50 + (i * 25), 50 + (i * 25), 2, person[1]);
-                    counter++;
-                }
-                else {
-                    console.log("Already alive.");
-                }
+                // Laver en person for hver person i array
+                Stickfigure(c, ctx, 50 + (i * 25), 50 + (i * 25), 2, person[1]);
             }
         }
     });
@@ -127,14 +127,12 @@ function showPosition(position) {
 
 //----------------------------------------------------------------------------------------------------//
 // Stickman canvas //
-function Stickfigure(x, y, size, name) {
+
+function Stickfigure(c, ctx, x, y, size, name) {
     // (x) venstre mod højre (0) - (500)
     // (y) op mod ned (0) - (300)
     // (0, 0) Øverste venstre hjørne
-
-    var c = document.getElementById("MapHolder");
-    var ctx = c.getContext("2d");
-
+    
     // Head
     ctx.beginPath();
     ctx.fillStyle = "black";
