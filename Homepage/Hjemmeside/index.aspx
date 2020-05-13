@@ -53,12 +53,12 @@
                 <br />
 
                 <!--Zoom control-->
-                <label for="Zoom">Size (between 0 and 100)</label>
-                <input type="range" id="Zoom" name="Zoom" min="0" max="100">
+                <p id="writtenValue">Zoom level: 2</p>
+                <input type="range" id="scale" min="1" max="3" step="0.1" oninput="showVal(this.value)" onchange="showVal(this.value)">
                 <br />
 
                 <!--The map-->
-                <canvas id="MapHolder" width="500" height="300" style="background-color: lightgray; border: 1px solid darkgray;"></canvas>
+                <canvas id="MapHolder" width="600" height="300"></canvas>
                 <br />
 
                 <!--List of people-->

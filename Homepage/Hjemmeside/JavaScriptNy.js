@@ -1,5 +1,5 @@
 ﻿//----------------------------------------------------------------------------------------------------//
-// Login //
+// Global variabler //
 
 var clientID = ""; // ID from backend
 var username = document.getElementById("username").innerHTML;
@@ -8,6 +8,9 @@ var c = document.getElementById("MapHolder");
 var ctx = c.getContext("2d");
 var width = c.width;
 var height = c.height;
+
+//----------------------------------------------------------------------------------------------------//
+// Login //
 
 function ProcessPerson() {
     var usernameInput = document.getElementById("UserNameInput").value;
@@ -26,7 +29,7 @@ function ProcessPerson() {
             alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
         },
         success: function (result) {
-            console.log("Du er nu oprettet.")
+            //console.log("Du er nu oprettet.")
 
             clientID = result.d;  // ID fra backend
 
@@ -42,6 +45,10 @@ function ProcessPerson() {
 
 //----------------------------------------------------------------------------------------------------//
 // Get People //
+
+var personsArr = [];
+var person = [];
+var ID = parseInt(clientID, 10);
 
 function GetPeople() {
     var dataValue = {
@@ -63,21 +70,19 @@ function GetPeople() {
 
             //Fjerner alle personer og starter med at gentegne os selv.
             ctx.clearRect(0, 0, width, height);
-            console.log(username);
             Stickfigure(ctx, width / 2, height / 2, 2, username);
 
             // Dele alle personer op i hver deres array index og fjerne os selv fra array
-            var personsArr = result.d.split('>');
-            var ID = parseInt(clientID, 10);
+            personsArr = result.d.split('>');
             personsArr.splice(ID, 1);
 
             // Dele hver person op i hver deres array index indexer
-            var person = [];
+            person = [];
             for (var i = 0; i < personsArr.length - 1; i++) {
                 person = personsArr[i].split('-');
 
                 // Laver en person for hver person i array
-                Stickfigure(c, ctx, 50 + (i * 25), 50 + (i * 25), 2, person[1]);
+                Stickfigure(ctx, 50 + (i * 25), 50 + (i * 25), 2, person[1]);
             }
         }
     });
@@ -118,7 +123,7 @@ function showPosition(position) {
             alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
         },
         success: function () {
-            console.log("GPS kordinaterne er nu opdateret.")
+            //console.log("GPS kordinaterne er nu opdateret.")
         }
     });
 }
@@ -179,5 +184,49 @@ function Stickfigure(ctx, x, y, size, name) {
     ctx.textAlign = "center";
     ctx.fillText(name, x, y - 15 / size);
 
-    console.log("I am alive. " + name);
+    //console.log("I am alive. " + name);
 }
+
+function showVal(newVal) {
+    document.getElementById("writtenValue").innerHTML = "Zoom level: " + newVal;
+
+    if (newVal > 2) {
+        console.log("Zoom level: " + newVal);
+        // Zoom out
+        //Fjerner alle personer og starter med at gentegne os selv.
+        ctx.clearRect(0, 0, width, height);
+        Stickfigure(ctx, width / 2, height / 2, newVal, username);
+
+        if (personsArr.length != 0) {
+            for (var i = 0; i < personsArr.length - 1; i++) {
+                person = personsArr[i].split('-');
+
+                // Laver en person for hver person i array
+                Stickfigure(ctx, 50 + (i * 25), 50 + (i * 25), newVal, person[1]);
+            }
+        }
+    }
+    else {
+        console.log("Zoom level: " + newVal);
+        // Zoom in
+        //Fjerner alle personer og starter med at gentegne os selv.
+        ctx.clearRect(0, 0, width, height);
+        Stickfigure(ctx, width / 2, height / 2, newVal, username);
+
+        if(personsArr.length != 0) {
+            for (var i = 0; i < personsArr.length - 1; i++) {
+                person = personsArr[i].split('-');
+
+                // Laver en person for hver person i array
+                Stickfigure(ctx, 50 + (i * 25), 50 + (i * 25), newVal, person[1]);
+            }
+        }
+    }
+}
+
+//// Zoom selve canvas størrelsen
+//var scale = document.getElementById("scale");
+
+//scale.addEventListener("change", function (e) {
+//    c.style.transform = "scale(" + e.target.value / 2 + "," + e.target.value / 2 + ")";
+//});
