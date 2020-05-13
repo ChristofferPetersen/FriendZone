@@ -32,7 +32,7 @@ function ProcessPerson() {
 
             username = usernameInput;
 
-            Stickfigure(c, ctx, width / 2, height / 2, 2, username); // StickFigure(canvas width, canvas height, size)
+            Stickfigure(ctx, width / 2, height / 2, 2, username);
 
             $("#Login").hide();
             $("#Canvas").show();
@@ -42,8 +42,6 @@ function ProcessPerson() {
 
 //----------------------------------------------------------------------------------------------------//
 // Get People //
-
-var counter = 0;
 
 function GetPeople() {
     var dataValue = {
@@ -66,7 +64,7 @@ function GetPeople() {
             //Fjerner alle personer og starter med at gentegne os selv.
             ctx.clearRect(0, 0, width, height);
             console.log(username);
-            Stickfigure(c, ctx, width / 2, height / 2, 2, username);
+            Stickfigure(ctx, width / 2, height / 2, 2, username);
 
             // Dele alle personer op i hver deres array index og fjerne os selv fra array
             var personsArr = result.d.split('>');
@@ -128,7 +126,7 @@ function showPosition(position) {
 //----------------------------------------------------------------------------------------------------//
 // Stickman canvas //
 
-function Stickfigure(c, ctx, x, y, size, name) {
+function Stickfigure(ctx, x, y, size, name) {
     // (x) venstre mod højre (0) - (500)
     // (y) op mod ned (0) - (300)
     // (0, 0) Øverste venstre hjørne
@@ -149,7 +147,7 @@ function Stickfigure(c, ctx, x, y, size, name) {
     // Mini stick
     ctx.beginPath();
     ctx.moveTo(x, y + 40 / size);
-    ctx.lineTo(x, y + 55 / size);
+    ctx.lineTo(x, y + 60 / size);
     ctx.strokeStyle = "black";
     ctx.stroke();
 
