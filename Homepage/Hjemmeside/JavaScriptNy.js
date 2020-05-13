@@ -2,7 +2,7 @@
 // Global variabler //
 
 var clientID = ""; // ID from backend
-var username = document.getElementById("username").innerHTML;
+var username = "";
 
 var c = document.getElementById("MapHolder");
 var ctx = c.getContext("2d");
@@ -34,6 +34,7 @@ function ProcessPerson() {
             clientID = result.d;  // ID fra backend
 
             username = usernameInput;
+            document.getElementById("username").innerHTML = usernameInput;
 
             Stickfigure(ctx, width / 2, height / 2, 2, username);
 
@@ -65,7 +66,7 @@ function GetPeople() {
             alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
         },
         success: function (result) {
-            //console.log("We returned: " + result.d);
+            console.log("We returned: " + result.d);
             document.getElementById('Person').innerHTML = result.d;
 
             //Fjerner alle personer og starter med at gentegne os selv.
@@ -126,7 +127,7 @@ function showPosition(position) {
             alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
         },
         success: function () {
-            //console.log("GPS kordinaterne er nu opdateret.")
+            console.log("GPS kordinaterne er nu opdateret.")
         }
     });
 }
@@ -187,7 +188,7 @@ function Stickfigure(ctx, x, y, size, name) {
     ctx.textAlign = "center";
     ctx.fillText(name, x, y - 15 / size);
 
-    //console.log("I am alive. " + name);
+    console.log("I am alive. " + name);
 }
 
 function showVal(newVal) {
