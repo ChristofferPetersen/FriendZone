@@ -8,6 +8,7 @@ var c = document.getElementById("MapHolder");
 var ctx = c.getContext("2d");
 var width = c.width;
 var height = c.height;
+var scale = 2;
 
 //----------------------------------------------------------------------------------------------------//
 // Login //
@@ -36,7 +37,7 @@ function ProcessPerson() {
             username = usernameInput;
             document.getElementById("username").innerHTML = usernameInput;
 
-            Stickfigure(ctx, width / 2, height / 2, 2, username);
+            Stickfigure(ctx, width / 2, height / 2, scale, username);
 
             $("#Login").hide();
             $("#Canvas").show();
@@ -71,7 +72,7 @@ function GetPeople() {
 
             //Fjerner alle personer og starter med at gentegne os selv.
             ctx.clearRect(0, 0, width, height);
-            Stickfigure(ctx, width / 2, height / 2, 2, username);
+            Stickfigure(ctx, width / 2, height / 2, scale, username);
 
             // Dele alle personer op i hver deres array index og fjerne os selv fra array
             personsArr = result.d.split('>');
@@ -86,7 +87,7 @@ function GetPeople() {
                 var posX = person[3].substring(10).trim();
 
                 // Laver en person for hver person i array
-                Stickfigure(ctx, (width / 2) - posX, (height / 2) - posY, 2, person[1]);
+                Stickfigure(ctx, (width / 2) - posX, (height / 2) - posY, scale, person[1]);
             }
         }
     });
@@ -193,9 +194,9 @@ function Stickfigure(ctx, x, y, size, name) {
 
 function showVal(newVal) {
     document.getElementById("writtenValue").innerHTML = "Zoom level: " + newVal;
-
+    scale = newVal;
     if (newVal > 2) {
-        console.log("Zoom level: " + newVal);
+        console.log("Zoom level: " + newVal + "Scale" + scale);
         // Zoom out
         //Fjerner alle personer og starter med at gentegne os selv.
         ctx.clearRect(0, 0, width, height);
