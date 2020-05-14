@@ -96,8 +96,8 @@ function GetPeople() {
                 var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
 
                 // Canvas size x = 600px || y = 300px
-                var PosXinPixels = AtoBinMeters / width;
-                var PosYinPixels = AtoBinMeters / height;
+                var PosXinPixels = (AtoBinMeters / width) * (AtoBinMeters * 100);
+                var PosYinPixels = (AtoBinMeters / height) * (AtoBinMeters * 100);
 
                 // Laver en person for hver person i array
                 Stickfigure(ctx, (width / 2) - PosXinPixels, (height / 2) - PosYinPixels, scale, name);
@@ -229,8 +229,8 @@ function showValScale(newVal) {
                 var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
 
                 // Canvas size x = 600px || y = 300px
-                var PosXinPixels = AtoBinMeters / width;
-                var PosYinPixels = AtoBinMeters / height;
+                var PosXinPixels = (AtoBinMeters / width) * (AtoBinMeters * 100);
+                var PosYinPixels = (AtoBinMeters / height) * (AtoBinMeters * 100);
 
                 // Laver en person for hver person i array
                 Stickfigure(ctx, (width / 2) - PosXinPixels, (height / 2) - PosYinPixels, scale, name);
@@ -256,8 +256,8 @@ function showValScale(newVal) {
                 var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
 
                 // Canvas size x = 600px || y = 300px
-                var PosXinPixels = AtoBinMeters / width;
-                var PosYinPixels = AtoBinMeters / height;
+                var PosXinPixels = (AtoBinMeters / width) * (AtoBinMeters * 100);
+                var PosYinPixels = (AtoBinMeters / height) * (AtoBinMeters * 100);
 
                 // Laver en person for hver person i array
                 Stickfigure(ctx, (width / 2) - PosXinPixels, (height / 2) - PosYinPixels, scale, name);
