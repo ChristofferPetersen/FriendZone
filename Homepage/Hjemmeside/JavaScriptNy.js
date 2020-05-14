@@ -72,10 +72,6 @@ function GetPeople() {
             //console.log("We returned: " + result.d);
             document.getElementById('Person').innerHTML = result.d;
 
-            //Fjerner alle personer og starter med at gentegne os selv.
-            ctx.clearRect(0, 0, width, height);
-            DrawStickFigure(ctx, width / 2, height / 2, scale, username);
-
             // Dele alle personer op i hver deres array index og fjerne os selv fra array
             personsArr = result.d.split('>');
             var ID = parseInt(clientID, 10) - 1;
@@ -87,23 +83,9 @@ function GetPeople() {
             person = [];
             for (var i = 0; i < personsArr.length - 1; i++) {
                 person = personsArr[i].split('-');
-
-                var name = person[1].substring(6).trim();
-                var posY = person[2].substring(11).trim();
-                var posX = person[3].substring(10).trim();
-
-                //// Afstand i meter mellem client og næste person i loopet
-                //var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
-
-                //// Canvas size x = 600px || y = 300px
-                //var PosXinPixels = (AtoBinMeters / width) * AtoBinMeters;
-                //var PosYinPixels = (AtoBinMeters / height) * AtoBinMeters;
-
-                // Laver en person for hver person i array
-                DrawStickFigure(ctx, (width / 2) - posX, (height / 2) - posY, scale, name);
-
-                //console.log(person[0] + " || " + person[1] + "- Other people");
             }
+
+            UpdateDrawings();
         }
     });
 }
@@ -209,62 +191,44 @@ function DrawStickFigure(ctx, x, y, size, name) {
     console.log("I am alive. " + name);
 }
 
+function UpdateDrawings() {
+    //Fjerner alle personer og starter med at gentegne os selv.
+    ctx.clearRect(0, 0, width, height);
+    DrawStickFigure(ctx, width / 2, height / 2, scale, username);
+
+    if (personsArr.length != 0) {
+        for (var i = 0; i < personsArr.length - 1; i++) {
+            var name = person[1].substring(6).trim();
+            var posY = person[2].substring(11).trim();
+            var posX = person[3].substring(10).trim();
+
+            //// Afstand i meter mellem client og næste person i loopet
+            //var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
+
+            //// Canvas size x = 600px || y = 300px
+            //var PosXinPixels = (AtoBinMeters / width) * AtoBinMeters;
+            //var PosYinPixels = (AtoBinMeters / height) * AtoBinMeters;
+
+            // Laver en person for hver person i array
+            DrawStickFigure(ctx, (width / 2) - posX, (height / 2) - posY, scale, name);
+
+            //console.log(person[0] + " || " + person[1] + "- Other people");
+        }
+    }
+}
+
 function showValScale(newVal) {
     document.getElementById("writtenValueScale").innerHTML = "Zoom level: " + newVal;
     scale = newVal;
     if (newVal > 2) {
         //console.log("Zoom level: " + newVal + "Scale" + scale);
         // Zoom out
-        //Fjerner alle personer og starter med at gentegne os selv.
-        ctx.clearRect(0, 0, width, height);
-        DrawStickFigure(ctx, width / 2, height / 2, newVal, username);
-
-        if (personsArr.length != 0) {
-            for (var i = 0; i < personsArr.length - 1; i++) {
-                var name = person[1].substring(6).trim();
-                var posY = person[2].substring(11).trim();
-                var posX = person[3].substring(10).trim();
-
-                //// Afstand i meter mellem client og næste person i loopet
-                //var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
-
-                //// Canvas size x = 600px || y = 300px
-                //var PosXinPixels = (AtoBinMeters / width) * AtoBinMeters;
-                //var PosYinPixels = (AtoBinMeters / height) * AtoBinMeters;
-
-                // Laver en person for hver person i array
-                DrawStickFigure(ctx, (width / 2) - posX, (height / 2) - posY, scale, name);
-
-                //console.log(person[0] + " || " + person[1] + "- Other people");
-            }
-        }
+        UpdateDrawings();
     }
     else {
         //console.log("Zoom level: " + newVal);
         // Zoom in
-        //Fjerner alle personer og starter med at gentegne os selv.
-        ctx.clearRect(0, 0, width, height);
-        DrawStickFigure(ctx, width / 2, height / 2, newVal, username);
-
-        if (personsArr.length != 0) {
-            for (var i = 0; i < personsArr.length - 1; i++) {
-                var name = person[1].substring(6).trim();
-                var posY = person[2].substring(11).trim();
-                var posX = person[3].substring(10).trim();
-
-                //// Afstand i meter mellem client og næste person i loopet
-                //var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
-
-                //// Canvas size x = 600px || y = 300px
-                //var PosXinPixels = (AtoBinMeters / width) * AtoBinMeters;
-                //var PosYinPixels = (AtoBinMeters / height) * AtoBinMeters;
-
-                // Laver en person for hver person i array
-                DrawStickFigure(ctx, (width / 2) - posX, (height / 2) - posY, scale, name);
-
-                //console.log(person[0] + " || " + person[1] + "- Other people");
-            }
-        }
+        UpdateDrawings();
     }
 }
 
