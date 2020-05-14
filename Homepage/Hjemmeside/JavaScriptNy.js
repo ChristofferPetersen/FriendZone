@@ -3,6 +3,7 @@
 
 var clientID = ""; // ID from backend
 var username = "";
+console.log(clientID + " || " + username + " -On page load");
 
 var c = document.getElementById("MapHolder");
 var ctx = c.getContext("2d");
@@ -37,6 +38,8 @@ function ProcessPerson() {
             username = usernameInput;
             document.getElementById("username").innerHTML = usernameInput;
 
+            console.log(clientID + " || " + username + " -Us after creation");
+
             Stickfigure(ctx, width / 2, height / 2, scale, username);
 
             $("#Login").hide();
@@ -50,7 +53,6 @@ function ProcessPerson() {
 
 var personsArr = [];
 var person = [];
-var ID = parseInt(clientID, 10);
 
 function GetPeople() {
     var dataValue = {
@@ -67,7 +69,7 @@ function GetPeople() {
             alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
         },
         success: function (result) {
-            console.log("We returned: " + result.d);
+            //console.log("We returned: " + result.d);
             document.getElementById('Person').innerHTML = result.d;
 
             //Fjerner alle personer og starter med at gentegne os selv.
@@ -76,7 +78,10 @@ function GetPeople() {
 
             // Dele alle personer op i hver deres array index og fjerne os selv fra array
             personsArr = result.d.split('>');
+            var ID = parseInt(clientID, 10) - 1;
+
             personsArr.splice(ID, 1);
+            console.log(ID.toString() + " || " + personsArr[0].toString() + " -Our ID and first in array");
 
             // Dele hver person op i hver deres array index indexer
             person = [];
@@ -88,6 +93,8 @@ function GetPeople() {
 
                 // Laver en person for hver person i array
                 Stickfigure(ctx, (width / 2) - posX, (height / 2) - posY, scale, person[1]);
+
+                console.log(person[0] + " || " + person[1] + "- Other people");
             }
         }
     });
@@ -128,7 +135,7 @@ function showPosition(position) {
             alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
         },
         success: function () {
-            console.log("GPS kordinaterne er nu opdateret.")
+            //console.log("GPS kordinaterne er nu opdateret.")
         }
     });
 }
@@ -189,14 +196,14 @@ function Stickfigure(ctx, x, y, size, name) {
     ctx.textAlign = "center";
     ctx.fillText(name, x, y - 15 / size);
 
-    console.log("I am alive. " + name);
+    //console.log("I am alive. " + name);
 }
 
 function showVal(newVal) {
     document.getElementById("writtenValue").innerHTML = "Zoom level: " + newVal;
     scale = newVal;
     if (newVal > 2) {
-        console.log("Zoom level: " + newVal + "Scale" + scale);
+        //console.log("Zoom level: " + newVal + "Scale" + scale);
         // Zoom out
         //Fjerner alle personer og starter med at gentegne os selv.
         ctx.clearRect(0, 0, width, height);
@@ -204,8 +211,6 @@ function showVal(newVal) {
 
         if (personsArr.length != 0) {
             for (var i = 0; i < personsArr.length - 1; i++) {
-                person = personsArr[i].split('-');
-
                 var posY = person[2].substring(11).trim();
                 var posX = person[3].substring(10).trim();
 
@@ -215,16 +220,14 @@ function showVal(newVal) {
         }
     }
     else {
-        console.log("Zoom level: " + newVal);
+        //console.log("Zoom level: " + newVal);
         // Zoom in
         //Fjerner alle personer og starter med at gentegne os selv.
         ctx.clearRect(0, 0, width, height);
         Stickfigure(ctx, width / 2, height / 2, newVal, username);
 
-        if(personsArr.length != 0) {
+        if (personsArr.length != 0) {
             for (var i = 0; i < personsArr.length - 1; i++) {
-                person = personsArr[i].split('-');
-
                 var posY = person[2].substring(11).trim();
                 var posX = person[3].substring(10).trim();
 
