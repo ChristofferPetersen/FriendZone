@@ -40,7 +40,7 @@ function ProcessPerson() {
 
             //console.log(clientID + " || " + username + " -Us after creation");
 
-            Stickfigure(ctx, width / 2, height / 2, scale, username);
+            DrawStickFigure(ctx, width / 2, height / 2, scale, username);
 
             $("#Login").hide();
             $("#Canvas").show();
@@ -74,7 +74,7 @@ function GetPeople() {
 
             //Fjerner alle personer og starter med at gentegne os selv.
             ctx.clearRect(0, 0, width, height);
-            Stickfigure(ctx, width / 2, height / 2, scale, username);
+            DrawStickFigure(ctx, width / 2, height / 2, scale, username);
 
             // Dele alle personer op i hver deres array index og fjerne os selv fra array
             personsArr = result.d.split('>');
@@ -92,15 +92,15 @@ function GetPeople() {
                 var posY = person[2].substring(11).trim();
                 var posX = person[3].substring(10).trim();
 
-                // Afstand i meter mellem client og næste person i loopet
-                var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
+                //// Afstand i meter mellem client og næste person i loopet
+                //var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
 
-                // Canvas size x = 600px || y = 300px
-                var PosXinPixels = (AtoBinMeters / width) * (AtoBinMeters * 100);
-                var PosYinPixels = (AtoBinMeters / height) * (AtoBinMeters * 100);
+                //// Canvas size x = 600px || y = 300px
+                //var PosXinPixels = (AtoBinMeters / width) * AtoBinMeters;
+                //var PosYinPixels = (AtoBinMeters / height) * AtoBinMeters;
 
                 // Laver en person for hver person i array
-                Stickfigure(ctx, (width / 2) - PosXinPixels, (height / 2) - PosYinPixels, scale, name);
+                DrawStickFigure(ctx, (width / 2) - posX, (height / 2) - posY, scale, name);
 
                 //console.log(person[0] + " || " + person[1] + "- Other people");
             }
@@ -153,7 +153,7 @@ function showPosition(position) {
 //----------------------------------------------------------------------------------------------------//
 // Stickman canvas //
 
-function Stickfigure(ctx, x, y, size, name) {
+function DrawStickFigure(ctx, x, y, size, name) {
     // (x) venstre mod højre (0) - (500)
     // (y) op mod ned (0) - (300)
     // (0, 0) Øverste venstre hjørne
@@ -206,7 +206,7 @@ function Stickfigure(ctx, x, y, size, name) {
     ctx.textAlign = "center";
     ctx.fillText(name, x, y - 15 / size);
 
-    //console.log("I am alive. " + name);
+    console.log("I am alive. " + name);
 }
 
 function showValScale(newVal) {
@@ -217,7 +217,7 @@ function showValScale(newVal) {
         // Zoom out
         //Fjerner alle personer og starter med at gentegne os selv.
         ctx.clearRect(0, 0, width, height);
-        Stickfigure(ctx, width / 2, height / 2, newVal, username);
+        DrawStickFigure(ctx, width / 2, height / 2, newVal, username);
 
         if (personsArr.length != 0) {
             for (var i = 0; i < personsArr.length - 1; i++) {
@@ -225,15 +225,15 @@ function showValScale(newVal) {
                 var posY = person[2].substring(11).trim();
                 var posX = person[3].substring(10).trim();
 
-                // Afstand i meter mellem client og næste person i loopet
-                var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
+                //// Afstand i meter mellem client og næste person i loopet
+                //var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
 
-                // Canvas size x = 600px || y = 300px
-                var PosXinPixels = (AtoBinMeters / width) * (AtoBinMeters * 100);
-                var PosYinPixels = (AtoBinMeters / height) * (AtoBinMeters * 100);
+                //// Canvas size x = 600px || y = 300px
+                //var PosXinPixels = (AtoBinMeters / width) * AtoBinMeters;
+                //var PosYinPixels = (AtoBinMeters / height) * AtoBinMeters;
 
                 // Laver en person for hver person i array
-                Stickfigure(ctx, (width / 2) - PosXinPixels, (height / 2) - PosYinPixels, scale, name);
+                DrawStickFigure(ctx, (width / 2) - posX, (height / 2) - posY, scale, name);
 
                 //console.log(person[0] + " || " + person[1] + "- Other people");
             }
@@ -244,7 +244,7 @@ function showValScale(newVal) {
         // Zoom in
         //Fjerner alle personer og starter med at gentegne os selv.
         ctx.clearRect(0, 0, width, height);
-        Stickfigure(ctx, width / 2, height / 2, newVal, username);
+        DrawStickFigure(ctx, width / 2, height / 2, newVal, username);
 
         if (personsArr.length != 0) {
             for (var i = 0; i < personsArr.length - 1; i++) {
@@ -252,15 +252,15 @@ function showValScale(newVal) {
                 var posY = person[2].substring(11).trim();
                 var posX = person[3].substring(10).trim();
 
-                // Afstand i meter mellem client og næste person i loopet
-                var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
+                //// Afstand i meter mellem client og næste person i loopet
+                //var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
 
-                // Canvas size x = 600px || y = 300px
-                var PosXinPixels = (AtoBinMeters / width) * (AtoBinMeters * 100);
-                var PosYinPixels = (AtoBinMeters / height) * (AtoBinMeters * 100);
+                //// Canvas size x = 600px || y = 300px
+                //var PosXinPixels = (AtoBinMeters / width) * AtoBinMeters;
+                //var PosYinPixels = (AtoBinMeters / height) * AtoBinMeters;
 
                 // Laver en person for hver person i array
-                Stickfigure(ctx, (width / 2) - PosXinPixels, (height / 2) - PosYinPixels, scale, name);
+                DrawStickFigure(ctx, (width / 2) - posX, (height / 2) - posY, scale, name);
 
                 //console.log(person[0] + " || " + person[1] + "- Other people");
             }
