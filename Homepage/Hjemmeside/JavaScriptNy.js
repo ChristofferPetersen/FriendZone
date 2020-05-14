@@ -3,7 +3,7 @@
 
 var clientID = ""; // ID from backend
 var username = "";
-console.log(clientID + " || " + username + " -On page load");
+//console.log(clientID + " || " + username + " -On page load");
 
 var c = document.getElementById("MapHolder");
 var ctx = c.getContext("2d");
@@ -38,7 +38,7 @@ function ProcessPerson() {
             username = usernameInput;
             document.getElementById("username").innerHTML = usernameInput;
 
-            console.log(clientID + " || " + username + " -Us after creation");
+            //console.log(clientID + " || " + username + " -Us after creation");
 
             Stickfigure(ctx, width / 2, height / 2, scale, username);
 
@@ -81,20 +81,28 @@ function GetPeople() {
             var ID = parseInt(clientID, 10) - 1;
 
             personsArr.splice(ID, 1);
-            console.log(ID.toString() + " || " + personsArr[0].toString() + " -Our ID and first in array");
+            //console.log(ID.toString() + " || " + personsArr[0].toString() + " -Our ID and first in array");
 
             // Dele hver person op i hver deres array index indexer
             person = [];
             for (var i = 0; i < personsArr.length - 1; i++) {
                 person = personsArr[i].split('-');
 
+                var name = person[1].substring(6).trim();
                 var posY = person[2].substring(11).trim();
                 var posX = person[3].substring(10).trim();
 
-                // Laver en person for hver person i array
-                Stickfigure(ctx, (width / 2) - posX, (height / 2) - posY, scale, person[1]);
+                // Afstand i meter mellem client og næste person i loopet
+                var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
 
-                console.log(person[0] + " || " + person[1] + "- Other people");
+                // Canvas size x = 600px || y = 300px
+                var PosXinPixels = AtoBinMeters / width;
+                var PosYinPixels = AtoBinMeters / height;
+
+                // Laver en person for hver person i array
+                Stickfigure(ctx, (width / 2) - PosXinPixels, (height / 2) - PosYinPixels, scale, name);
+
+                //console.log(person[0] + " || " + person[1] + "- Other people");
             }
         }
     });
@@ -105,6 +113,8 @@ function GetPeople() {
 
 var Longitude = document.getElementById("Longitude");
 var Latitude = document.getElementById("Latitude");
+var myPosX = Latitude.innerHTML.substring(10).trim();
+var myPosY = Longitude.innerHTML.substring(10).trim();
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -199,8 +209,8 @@ function Stickfigure(ctx, x, y, size, name) {
     //console.log("I am alive. " + name);
 }
 
-function showVal(newVal) {
-    document.getElementById("writtenValue").innerHTML = "Zoom level: " + newVal;
+function showValScale(newVal) {
+    document.getElementById("writtenValueScale").innerHTML = "Zoom level: " + newVal;
     scale = newVal;
     if (newVal > 2) {
         //console.log("Zoom level: " + newVal + "Scale" + scale);
@@ -211,11 +221,21 @@ function showVal(newVal) {
 
         if (personsArr.length != 0) {
             for (var i = 0; i < personsArr.length - 1; i++) {
+                var name = person[1].substring(6).trim();
                 var posY = person[2].substring(11).trim();
                 var posX = person[3].substring(10).trim();
 
+                // Afstand i meter mellem client og næste person i loopet
+                var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
+
+                // Canvas size x = 600px || y = 300px
+                var PosXinPixels = AtoBinMeters / width;
+                var PosYinPixels = AtoBinMeters / height;
+
                 // Laver en person for hver person i array
-                Stickfigure(ctx, (width / 2) - posX, (height / 2) - posY, newVal, person[1]);
+                Stickfigure(ctx, (width / 2) - PosXinPixels, (height / 2) - PosYinPixels, scale, name);
+
+                //console.log(person[0] + " || " + person[1] + "- Other people");
             }
         }
     }
@@ -228,19 +248,46 @@ function showVal(newVal) {
 
         if (personsArr.length != 0) {
             for (var i = 0; i < personsArr.length - 1; i++) {
+                var name = person[1].substring(6).trim();
                 var posY = person[2].substring(11).trim();
                 var posX = person[3].substring(10).trim();
 
+                // Afstand i meter mellem client og næste person i loopet
+                var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
+
+                // Canvas size x = 600px || y = 300px
+                var PosXinPixels = AtoBinMeters / width;
+                var PosYinPixels = AtoBinMeters / height;
+
                 // Laver en person for hver person i array
-                Stickfigure(ctx, (width / 2) - posX, (height / 2) - posY, newVal, person[1]);
+                Stickfigure(ctx, (width / 2) - PosXinPixels, (height / 2) - PosYinPixels, scale, name);
+
+                //console.log(person[0] + " || " + person[1] + "- Other people");
             }
         }
     }
 }
 
-//// Zoom selve canvas størrelsen
-//var scale = document.getElementById("scale");
-
-//scale.addEventListener("change", function (e) {
-//    c.style.transform = "scale(" + e.target.value / 2 + "," + e.target.value / 2 + ")";
-//});
+//----------------------------------------------------------------------------------------------------//
+// Distance //
+function distance(lat1, lon1, lat2, lon2, unit) {
+    if ((lat1 == lat2) && (lon1 == lon2)) {
+        return 0;
+    }
+    else {
+        var radlat1 = Math.PI * lat1 / 180;
+        var radlat2 = Math.PI * lat2 / 180;
+        var theta = lon1 - lon2;
+        var radtheta = Math.PI * theta / 180;
+        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+        if (dist > 1) {
+            dist = 1;
+        }
+        dist = Math.acos(dist);
+        dist = dist * 180 / Math.PI;
+        dist = dist * 60 * 1.1515;
+        if (unit == "K") { dist = dist * 1.609344 }
+        if (unit == "N") { dist = dist * 0.8684 }
+        return dist;
+    }
+}

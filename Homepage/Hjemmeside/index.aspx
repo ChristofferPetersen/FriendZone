@@ -53,8 +53,8 @@
                 <br />
 
                 <!--Zoom control-->
-                <p id="writtenValue">Zoom level: 2</p>
-                <input type="range" id="scale" min="1" max="3" step="0.1" oninput="showVal(this.value)" onchange="showVal(this.value)">
+                <p id="writtenValueScale">Scale level: 2</p>
+                <input type="range" id="scale" min="1" max="3" step="0.1" oninput="showValScale(this.value)" onchange="showValScale(this.value)">
                 <br />
 
                 <!--The map-->
