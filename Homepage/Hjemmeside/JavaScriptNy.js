@@ -190,7 +190,7 @@ function DrawStickFigure(ctx, x, y, size, name) {
     ctx.textAlign = "center";
     ctx.fillText(name, x, y - 15 / size);
 
-   console.log("I am alive. " + name);
+   //console.log("I am alive. " + name);
 }
 
 function UpdateDrawings() {
@@ -214,22 +214,18 @@ function UpdateDrawings() {
             var posX = person[3].substring(10).trim();
 
             //// Afstand i meter mellem client og næste person i loopet
-            AtoBinMeters = distance(parseFloat(myPosX.substring(10).trim()), parseFloat(myPosY.substring(10).trim()), parseFloat(posX), parseFloat(posY), "K") / 1000;
+            //AtoBinMeters = distance(parseFloat(myPosX.substring(10).trim()), parseFloat(myPosY.substring(10).trim()), parseFloat(posX), parseFloat(posY), "K") / 1000;
 
             //Calculationg new canvas location based on distance
-            var calcNewX = (parseFloat(posX) - parseFloat(myPosX.substring(10).trim())) + parseFloat(AtoBinMeters);
-            var calcNewY = (parseFloat(posY) - parseFloat(myPosY.substring(10).trim())) + parseFloat(AtoBinMeters);
-
-            ////Recenter person if his canvas position is 0 in either x or y
-            //if (calcNewX == 0) { calcNewX = width / 2 };
-            //if (calcNewY == 0) { calcNewY = height / 2 };
+            var calcNewX = (parseFloat(myPosX.substring(10).trim()) - parseFloat(posX)) * 0.00001;
+            var calcNewY = (parseFloat(myPosY.substring(10).trim()) - parseFloat(posY)) * 0.00001;
 
             // Laver en person for hver person i array
             DrawStickFigure(ctx, calcNewX, calcNewY, scale, name);
 
+            //"\nDistance to client: " + parseFloat(AtoBinMeters) +
             console.log(
                 "Name: " + name +
-                "\nDistance to client: " + parseFloat(AtoBinMeters) +
                 "\nNew X: " + calcNewX +
                 "\nNew Y: " + calcNewY
             );
@@ -276,4 +272,4 @@ function distance(lat1, lon1, lat2, lon2, unit) {
         if (unit == "N") { dist = dist * 0.8684 }
         return dist;
     }
-}
+} // Ikke i brug i øjeblikket
