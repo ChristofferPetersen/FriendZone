@@ -115,7 +115,9 @@ function showPosition(position) {
     };
 
     Longitude.innerHTML = "Longitude: " + dataValue.longitude;
+    myPosY = Longitude.innerHTML;
     Latitude.innerHTML = "Latitude: " + dataValue.latitude;
+    myPosX = Latitude.innerHTML;
 
     $.ajax({
         type: "POST",
@@ -188,7 +190,7 @@ function DrawStickFigure(ctx, x, y, size, name) {
     ctx.textAlign = "center";
     ctx.fillText(name, x, y - 15 / size);
 
-    console.log("I am alive. " + name);
+   console.log("I am alive. " + name);
 }
 
 function UpdateDrawings() {
@@ -196,6 +198,15 @@ function UpdateDrawings() {
     ctx.clearRect(0, 0, width, height);
     DrawStickFigure(ctx, width / 2, height / 2, scale, username);
 
+    console.log(
+        "Client: " + username +
+        "\nCanvas center X: " + (width / 2) +
+        "\nCanvas center Y: " + (height / 2) +
+        "\nNew X: " + myPosX +
+        "\nNew Y: " + myPosY
+    );
+
+    var AtoBinMeters = 0;
     if (personsArr.length != 0) {
         for (var i = 0; i < personsArr.length - 1; i++) {
             var name = person[1].substring(6).trim();
@@ -203,14 +214,25 @@ function UpdateDrawings() {
             var posX = person[3].substring(10).trim();
 
             //// Afstand i meter mellem client og næste person i loopet
-            //var AtoBinMeters = distance(myPosX, myPosY, posX, posY, "K") / 1000;
+            AtoBinMeters = distance(parseFloat(myPosX.substring(10).trim()), parseFloat(myPosY.substring(10).trim()), parseFloat(posX), parseFloat(posY), "K") / 1000;
 
-            //// Canvas size x = 600px || y = 300px
-            //var PosXinPixels = (AtoBinMeters / width) * AtoBinMeters;
-            //var PosYinPixels = (AtoBinMeters / height) * AtoBinMeters;
+            //Calculationg new canvas location based on distance
+            var calcNewX = (parseFloat(posX) - parseFloat(myPosX.substring(10).trim())) + parseFloat(AtoBinMeters);
+            var calcNewY = (parseFloat(posY) - parseFloat(myPosY.substring(10).trim())) + parseFloat(AtoBinMeters);
+
+            ////Recenter person if his canvas position is 0 in either x or y
+            //if (calcNewX == 0) { calcNewX = width / 2 };
+            //if (calcNewY == 0) { calcNewY = height / 2 };
 
             // Laver en person for hver person i array
-            DrawStickFigure(ctx, (width / 2) - posX, (height / 2) - posY, scale, name);
+            DrawStickFigure(ctx, calcNewX, calcNewY, scale, name);
+
+            console.log(
+                "Name: " + name +
+                "\nDistance to client: " + parseFloat(AtoBinMeters) +
+                "\nNew X: " + calcNewX +
+                "\nNew Y: " + calcNewY
+            );
 
             //console.log(person[0] + " || " + person[1] + "- Other people");
         }
